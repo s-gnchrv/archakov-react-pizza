@@ -1,0 +1,33 @@
+@import '../../scss/variables';
+
+.pagination {
+    display: flex;
+    column-gap: 9px;
+
+    a {
+        width: 40px;
+        height: 40px;
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid $orange;
+        border-radius: 100%;
+        color: $orange;
+        box-sizing: border-box;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover, &.link_active {
+            background-color: $orange;
+            color: #fff;
+        }
+
+        &.link_disabled {
+            background-color: #eee;
+            border: 1px solid #eee;
+            color: #aaa;
+            cursor: default;
+        }
+    }
+}
