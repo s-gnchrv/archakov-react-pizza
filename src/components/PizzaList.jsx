@@ -12,7 +12,7 @@ function PizzaList() {
     <>
       {isLoading
         ? [...new Array(4)].map((_, index) => <PizzaSkeleton key={index} />)
-        : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+        : pizzas.map((pizza) => <PizzaBlock key={pizza.id} pizza={pizza} />)}
     </>
   );
 }

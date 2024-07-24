@@ -36,7 +36,7 @@ const Search = () => {
     <div className={styles.search}>
       <svg
         className={`${styles.icon} ${styles.icon_search}`}
-        enable-background="new 0 0 32 32"
+        enableBackground="new 0 0 32 32"
         id="Glyph"
         version="1.1"
         viewBox="0 0 32 32"
