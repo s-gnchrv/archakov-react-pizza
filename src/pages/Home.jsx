@@ -7,40 +7,25 @@ import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { setFilter } from "../redux/filterSlice";
-import { setIsLoading, setPizzas, clearPizzas } from "../redux/pizzaSlice";
+import {
+  setIsLoading,
+  setPizzas,
+  clearPizzas,
+  fetchPizzas,
+} from "../redux/pizzaSlice";
 import axios from "axios";
 
 function Home() {
   const dispatch = useDispatch();
   const { search, category, sort, page } = useSelector((state) => state.filter);
+  const status = useSelector((state) => state.pizza.status);
 
   const [params, setParams] = useSearchParams();
   const isMounted = useRef(false);
   const isSearch = useRef(false);
 
-  const fetchPizzas = () => {
-    dispatch(setIsLoading(true));
-
-    axios
-      .get("https://658fd4fccbf74b575eca2c05.mockapi.io/pizza/", {
-        params: {
-          category: category > 0 ? category : null,
-          sortBy: sortList[sort].field,
-          order: sortList[sort].order,
-          title: search,
-          page: page + 1,
-          limit: 4,
-        },
-      })
-      .then((res) => {
-        dispatch(setPizzas(res.data));
-      })
-      .catch((err) => {
-        dispatch(clearPizzas());
-      })
-      .finally(() => {
-        dispatch(setIsLoading(false));
-      });
+  const getPizzas = async () => {
+    dispatch(fetchPizzas({ category, sort, search, page }));
   };
 
   useEffect(() => {
@@ -59,7 +44,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (!isSearch.current) fetchPizzas();
+    if (!isSearch.current) getPizzas();
     isSearch.current = false;
   }, [category, sort, search, page]);
 
@@ -84,9 +69,19 @@ function Home() {
       <h2 className="content__title">
         {search ? `Пиццы по запросу "${search}"` : "Все пиццы"}
       </h2>
-      <div className="content__items pizza-items">
-        <PizzaList />
-      </div>
+      {status === "error" ? (
+        <div className="content__error">
+          <h2>Произошла ошибка 😕</h2>
+          <p>
+            К сожалению, не удалось получить пиццы. Попробуйте повторить попытку
+            позже.
+          </p>
+        </div>
+      ) : (
+        <div className="content__items pizza-items">
+          <PizzaList />
+        </div>
+      )}
       <div className="content__pagination">
         <Pagination />
       </div>

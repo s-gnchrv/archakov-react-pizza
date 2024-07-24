@@ -1,25 +1,51 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+import { sortList } from "../components/Sort";
 
 const initialState = {
-  isLoading: true,
+  status: "loading", // loading | success | error
   pizzas: [],
 };
+
+export const fetchPizzas = createAsyncThunk(
+  "pizza/fetchPizzasStatus",
+  async ({ category, sort, search, page }) => {
+    const { data } = await axios.get(
+      "https://658fd4fccbf74b575eca2c05.mockapi.io/pizza/",
+      {
+        params: {
+          category: category > 0 ? category : null,
+          sortBy: sortList[sort].field,
+          order: sortList[sort].order,
+          title: search,
+          page: page + 1,
+          limit: 4,
+        },
+      }
+    );
+    return data;
+  }
+);
 
 export const pizzaSlice = createSlice({
   name: "pizza",
   initialState,
-  reducers: {
-    setIsLoading: (state, action) => {
-      state.isLoading = action.payload;
-    },
-    setPizzas: (state, action) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchPizzas.pending, (state, action) => {
+      state.status = "loading";
+    });
+    builder.addCase(fetchPizzas.fulfilled, (state, action) => {
       state.pizzas = action.payload;
-    },
-    clearPizzas: (state) => {
+      state.status = "success";
+    });
+    builder.addCase(fetchPizzas.rejected, (state) => {
       state.pizzas = [];
-    },
+      state.status = "error";
+    });
   },
 });
 
-export const { setIsLoading, setPizzas, clearPizzas } = pizzaSlice.actions;
+export const {} = pizzaSlice.actions;
 export default pizzaSlice.reducer;

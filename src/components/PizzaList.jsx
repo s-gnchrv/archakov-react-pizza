@@ -6,11 +6,11 @@ import { useSelector } from "react-redux";
 // import pizzas from "../assets/pizzas.json";
 
 function PizzaList() {
-  const { pizzas, isLoading } = useSelector((state) => state.pizza);
+  const { pizzas, status } = useSelector((state) => state.pizza);
 
   return (
     <>
-      {isLoading
+      {status === "loading"
         ? [...new Array(4)].map((_, index) => <PizzaSkeleton key={index} />)
         : pizzas.map((pizza) => <PizzaBlock key={pizza.id} pizza={pizza} />)}
     </>
