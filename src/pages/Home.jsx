@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import Categories from "../components/Categories";
-import Sort, { sortList } from "../components/Sort";
+import Sort from "../components/Sort";
 import PizzaList from "../components/PizzaList";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { setFilter } from "../redux/filterSlice";
-import {
-  setIsLoading,
-  setPizzas,
-  clearPizzas,
-  fetchPizzas,
-} from "../redux/pizzaSlice";
+import { fetchPizzas } from "../redux/pizzaSlice";
 import axios from "axios";
 
 function Home() {
@@ -25,7 +20,7 @@ function Home() {
   const isSearch = useRef(false);
 
   const getPizzas = async () => {
-    dispatch(fetchPizzas({ category, sort, search, page }));
+    dispatch(fetchPizzas());
   };
 
   useEffect(() => {
