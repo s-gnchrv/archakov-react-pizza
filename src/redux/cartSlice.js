@@ -51,6 +51,18 @@ const cartSlice = createSlice({
   },
 });
 
+export const selectCartCount = (state) =>
+  state.cart.items.reduce((sum, item) => sum + item.count, 0);
+
+export const selectCartSum = (state) =>
+  state.cart.items.reduce(
+    (sum, item) =>
+      sum +
+      state.cart.pizzasInfo.find((pizza) => pizza.id === item.pizzaId).price *
+        item.count,
+    0
+  );
+
 export const { addItem, removeItem, incrementItem, decrementItem, clearItems } =
   cartSlice.actions;
 export default cartSlice.reducer;

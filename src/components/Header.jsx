@@ -4,22 +4,13 @@ import logoSvg from "../assets/img/pizza-logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import { useSelector } from "react-redux";
+import { selectCartCount, selectCartSum } from "../redux/cartSlice";
 
 const Header = () => {
   const router = useNavigate();
 
-  const cartCount = useSelector((state) =>
-    state.cart.items.reduce((sum, item) => sum + item.count, 0)
-  );
-  const cartSum = useSelector((state) =>
-    state.cart.items.reduce(
-      (sum, item) =>
-        sum +
-        state.cart.pizzasInfo.find((pizza) => pizza.id === item.pizzaId).price *
-          item.count,
-      0
-    )
-  );
+  const cartCount = useSelector(selectCartCount);
+  const cartSum = useSelector(selectCartSum);
 
   return (
     <div className="header">

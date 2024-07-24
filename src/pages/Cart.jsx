@@ -2,19 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { useDispatch, useSelector } from "react-redux";
-import { clearItems } from "../redux/cartSlice";
+import { clearItems, selectCartCount, selectCartSum } from "../redux/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const { items, pizzasInfo } = useSelector((state) => state.cart);
-  const cartCount = items.reduce((sum, item) => sum + item.count, 0);
-  const cartSum = items.reduce(
-    (sum, item) =>
-      sum +
-      pizzasInfo.find((pizza) => pizza.id === item.pizzaId).price * item.count,
-    0
-  );
+  const cartCount = useSelector(selectCartCount);
+  const cartSum = useSelector(selectCartSum);
 
   if (cartCount < 1) return <CartEmpty />;
 
