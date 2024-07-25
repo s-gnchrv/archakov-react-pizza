@@ -4,7 +4,7 @@ import axios from "axios";
 import { sortList } from "../components/Sort";
 
 const initialState = {
-  status: "loading", // loading | success | error
+  status: "loading", // loading | success | success_detail | error
   pizzas: [],
 };
 
@@ -30,6 +30,22 @@ export const fetchPizzas = createAsyncThunk(
   }
 );
 
+export const fetchPizzaById = createAsyncThunk(
+  "pizza/fetchPizzaIdStatus",
+  async (id) => {
+    const { data } = await axios.get(
+      "https://658fd4fccbf74b575eca2c05.mockapi.io/pizza/",
+      {
+        params: {
+          id,
+        },
+      }
+    );
+
+    return data;
+  }
+);
+
 export const pizzaSlice = createSlice({
   name: "pizza",
   initialState,
@@ -46,8 +62,19 @@ export const pizzaSlice = createSlice({
       state.pizzas = [];
       state.status = "error";
     });
+    builder.addCase(fetchPizzaById.fulfilled, (state, action) => {
+      state.pizzas = action.payload;
+      state.status = "success_detail";
+    });
+    builder.addCase(fetchPizzaById.rejected, (state) => {
+      state.pizzas = [];
+      state.status = "error";
+    });
   },
 });
 
-export const {} = pizzaSlice.actions;
+export const selectPizzaById = (id) => (state) =>
+  state.pizza.pizzas.find((pizza) => pizza.id === Number(id));
+
+// export const {} = pizzaSlice.actions;
 export default pizzaSlice.reducer;

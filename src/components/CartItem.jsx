@@ -1,5 +1,5 @@
 import React from "react";
-import { doughTypes } from "./PizzaBlock";
+import { doughTypes } from "./PizzaInterections";
 import { useDispatch } from "react-redux";
 import { decrementItem, incrementItem, removeItem } from "../redux/cartSlice";
 

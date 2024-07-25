@@ -1,0 +1,23 @@
+.block {
+    width: 100%;
+    max-width: 700px;
+    margin: 50px auto;
+    display: flex;
+    column-gap: 20px;
+    text-align: left;
+
+    h2 {
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    p {
+        margin-bottom: 30px;
+    }
+
+    :global {
+        .pizza-block__selector {
+            text-align: center;
+        }
+    }
+}

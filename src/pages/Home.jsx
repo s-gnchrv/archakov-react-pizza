@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { setFilter } from "../redux/filterSlice";
 import { fetchPizzas } from "../redux/pizzaSlice";
-import axios from "axios";
 
 function Home() {
   const dispatch = useDispatch();
@@ -39,7 +38,10 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (!isSearch.current) getPizzas();
+    if (!isSearch.current) {
+      if ((!isMounted.current && status !== "success") || isMounted.current)
+        getPizzas();
+    }
     isSearch.current = false;
   }, [category, sort, search, page]);
 

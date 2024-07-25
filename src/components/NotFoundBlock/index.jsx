@@ -1,8 +1,12 @@
 import React from "react";
 
 import styles from "./NotFoundBlock.module.scss";
+import { useRouteError } from "react-router-dom";
 
 const NotFoundBlock = () => {
+  const error = useRouteError();
+  console.log(error);
+
   return (
     <div className={styles.root}>
       <h1>
