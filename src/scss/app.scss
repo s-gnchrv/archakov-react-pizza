@@ -189,6 +189,17 @@ body {
             display: none;
           }
         }
+
+        &:disabled {
+          background-color: #eee;
+          color: #aaa;
+          border: 2px solid #eee;
+          cursor: default;
+
+          svg path {
+            fill: #aaa;
+          }
+        }
       }
 
       b {

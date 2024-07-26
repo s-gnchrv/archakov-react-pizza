@@ -27,10 +27,11 @@ const CartItem: React.FC<CartItemProps> = ({ id, pizza, count, type, size }) => 
         </p>
       </div>
       <div className="cart__item-count">
-        <div
+        <button
           onClick={() => {
             dispatch(decrementItem(id));
           }}
+          disabled={count < 2}
           className="button button--outline button--circle cart__item-count-minus"
         >
           <svg
@@ -49,9 +50,9 @@ const CartItem: React.FC<CartItemProps> = ({ id, pizza, count, type, size }) => 
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
-        <div
+        <button
           onClick={() => {
             dispatch(incrementItem(id));
           }}
@@ -73,13 +74,13 @@ const CartItem: React.FC<CartItemProps> = ({ id, pizza, count, type, size }) => 
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className="cart__item-price">
         <b>{pizza.price * count} ₽</b>
       </div>
       <div className="cart__item-remove">
-        <div
+        <button
           onClick={() => {
             dispatch(removeItem(id));
           }}
@@ -101,7 +102,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, pizza, count, type, size }) => 
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );
