@@ -1,8 +1,9 @@
 import React from "react";
 import PizzaInterections from "./PizzaInterections";
 import { useNavigate } from "react-router-dom";
+import { Pizza } from "../redux/pizzaSlice";
 
-const PizzaBlock = ({ pizza }) => {
+const PizzaBlock: React.FC<{pizza: Pizza}> = ({ pizza }) => {
   const { id, title, imageUrl } = { ...pizza };
 
   const router = useNavigate();

@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { clearItems, selectCartCount, selectCartSum } from "../redux/cartSlice";
 import CartEmpty from "../components/CartEmpty";
+import { RootState, useAppDispatch } from "../redux/store";
 
-export default function Cart() {
-  const dispatch = useDispatch();
-  const { items, pizzasInfo } = useSelector((state) => state.cart);
+const Cart: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { items, pizzasInfo } = useSelector((state: RootState) => state.cart);
   const cartCount = useSelector(selectCartCount);
   const cartSum = useSelector(selectCartSum);
 
@@ -96,9 +97,9 @@ export default function Cart() {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item, index) => (
+          {items.map((item) => (
             <CartItem
-              key={index}
+              key={item.id}
               pizza={pizzasInfo.find((pizza) => pizza.id === item.pizzaId)}
               {...item}
             />
@@ -115,7 +116,7 @@ export default function Cart() {
           </div>
           <div className="cart__bottom-buttons">
             <Link
-              to={-1}
+              to={".."}
               className="button button--outline button--add go-back-btn"
             >
               <svg
@@ -145,3 +146,5 @@ export default function Cart() {
     </div>
   );
 }
+
+export default Cart;

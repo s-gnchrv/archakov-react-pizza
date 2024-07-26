@@ -2,10 +2,10 @@ import React from "react";
 import PizzaDetailBlock from "../components/PizzaDetailBlock";
 import { Link } from "react-router-dom";
 
-const PizzaDetail = () => {
+const PizzaDetail: React.FC = () => {
   return (
     <div className="container">
-      <Link className="button button--outline button--add go-back-btn" to={-1}>
+      <Link className="button button--outline button--add go-back-btn" to={".."}>
         <svg
           width="8"
           height="14"

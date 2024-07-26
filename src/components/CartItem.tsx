@@ -2,9 +2,18 @@ import React from "react";
 import { doughTypes } from "./PizzaInterections";
 import { useDispatch } from "react-redux";
 import { decrementItem, incrementItem, removeItem } from "../redux/cartSlice";
+import { useAppDispatch } from "../redux/store";
 
-const CartItem = ({ id, pizza, count, type, size }) => {
-  const dispatch = useDispatch();
+type CartItemProps = {
+  id: number;
+  pizza: any;
+  count: number;
+  type: number;
+  size: number;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ id, pizza, count, type, size }) => {
+  const dispatch = useAppDispatch();
 
   return (
     <div className="cart__item">

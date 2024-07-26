@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/filterSlice";
+import { RootState } from "../redux/store";
 
 export const sortList = [
   { title: "популярности", field: "rating", order: "desc" },
@@ -8,17 +9,17 @@ export const sortList = [
   { title: "алфавиту", field: "title", order: "asc" },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector((state: RootState) => state.filter.sort);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onBodyClick = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) setIsOpen(false);
+    const onBodyClick = (event: MouseEvent) => {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) setIsOpen(false);
     };
 
     document.body.addEventListener("click", onBodyClick);

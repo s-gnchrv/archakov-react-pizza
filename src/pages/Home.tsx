@@ -4,15 +4,16 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaList from "../components/PizzaList";
 import Pagination from "../components/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
-import { setFilter } from "../redux/filterSlice";
-import { fetchPizzas } from "../redux/pizzaSlice";
+import { useSelector } from "react-redux";
+import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
+import { Filter, setFilter } from "../redux/filterSlice";
+import { fetchPizzas, Status } from "../redux/pizzaSlice";
+import { RootState, useAppDispatch } from "../redux/store";
 
-function Home() {
-  const dispatch = useDispatch();
-  const { search, category, sort, page } = useSelector((state) => state.filter);
-  const status = useSelector((state) => state.pizza.status);
+const Home: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { search, category, sort, page } = useSelector((state: RootState) => state.filter);
+  const status = useSelector((state: RootState) => state.pizza.status);
 
   const [params, setParams] = useSearchParams();
   const isMounted = useRef(false);
@@ -25,7 +26,7 @@ function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    const filter = {};
+    const filter: Filter = {};
     if (params.get("category"))
       filter.category = Number(params.get("category"));
     if (params.get("sort")) filter.sort = Number(params.get("sort"));
@@ -39,7 +40,7 @@ function Home() {
 
   useEffect(() => {
     if (!isSearch.current) {
-      if ((!isMounted.current && status !== "success") || isMounted.current)
+      if ((!isMounted.current && status !== Status.Success) || isMounted.current)
         getPizzas();
     }
     isSearch.current = false;
@@ -47,12 +48,12 @@ function Home() {
 
   useEffect(() => {
     if (isMounted.current) {
-      const obj = {};
-      if (category > 0) obj.category = category;
-      if (sort > 0) obj.sort = sort;
-      if (page > 0) obj.page = page;
+      const filter: Filter = {};
+      if (category > 0) filter.category = category;
+      if (sort > 0) filter.sort = sort;
+      if (page > 0) filter.page = page;
 
-      setParams(obj);
+      setParams(filter as URLSearchParamsInit);
     }
     isMounted.current = true;
   }, [category, sort, page]);
@@ -66,7 +67,7 @@ function Home() {
       <h2 className="content__title">
         {search ? `Пиццы по запросу "${search}"` : "Все пиццы"}
       </h2>
-      {status === "error" ? (
+      {status === Status.Error ? (
         <div className="content__error">
           <h2>Произошла ошибка 😕</h2>
           <p>

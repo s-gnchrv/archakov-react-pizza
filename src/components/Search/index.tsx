@@ -4,24 +4,25 @@ import debounce from "lodash.debounce";
 import styles from "./Search.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSearch, setSearch } from "../../redux/filterSlice";
+import { RootState } from "../../redux/store";
 
-const Search = () => {
-  const search = useSelector((state) => state.filter.search);
+const Search: React.FC = () => {
+  const search = useSelector((state: RootState) => state.filter.search);
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const updateSearch = useCallback(
-    debounce((val) => {
+    debounce((val: string) => {
       dispatch(setSearch(val.trim()));
     }, 500),
     []
   );
 
-  const onInputChange = (obj) => {
-    const val = obj.target.value;
+  const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const val = event.target.value;
     setValue(val);
     updateSearch(val);
   };
@@ -29,7 +30,7 @@ const Search = () => {
   const onClearClick = () => {
     setValue("");
     dispatch(clearSearch());
-    inputRef.current.focus();
+    inputRef.current?.focus?.();
   };
 
   return (
@@ -57,7 +58,7 @@ const Search = () => {
       {value && (
         <svg
           onClick={onClearClick}
-          class={`${styles.icon} ${styles.icon_clear}`}
+          className={`${styles.icon} ${styles.icon_clear}`}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >

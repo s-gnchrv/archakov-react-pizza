@@ -6,7 +6,7 @@ import Search from "./Search";
 import { useSelector } from "react-redux";
 import { selectCartCount, selectCartSum } from "../redux/cartSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const router = useNavigate();
   const { pathname } = useLocation();
 

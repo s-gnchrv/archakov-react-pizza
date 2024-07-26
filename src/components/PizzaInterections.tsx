@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../redux/cartSlice";
+import { addItem, selectCartCount, selectPizzaCount } from "../redux/cartSlice";
+import { Pizza } from "../redux/pizzaSlice";
+import { useAppDispatch } from "../redux/store";
 
 export const doughTypes = ["тонкое", "традиционное"];
 
-const PizzaInterections = ({ pizza }) => {
+const PizzaInterections: React.FC<{pizza: Pizza}> = ({ pizza }) => {
   const { id, types, sizes, price } = { ...pizza };
 
   const [dough, setDough] = useState(0);
   const [size, setSize] = useState(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const count = useSelector((state) => {
-    const item = state.cart.items.find(
-      (item) => item.pizzaId === id && item.type === dough && item.size === size
-    );
-    return item ? item.count : 0;
-  });
+  const count = useSelector(selectPizzaCount(id, dough, size));
 
   const onAddClick = () => {
     dispatch(addItem({ pizza, count: 1, type: dough, size }));

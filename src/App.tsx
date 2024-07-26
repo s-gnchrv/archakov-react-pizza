@@ -1,3 +1,4 @@
+import React from "react";
 import "./scss/app.scss";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -8,7 +9,7 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import PizzaDetail from "./pages/PizzaDetail";
 
-function App() {
+const App: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: "/",
