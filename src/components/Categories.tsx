@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../redux/filterSlice";
-import { RootState } from "../redux/store";
+import { RootState, useAppDispatch } from "../redux/store";
 
 const catList: string[] = [
   "Все",
@@ -13,8 +13,8 @@ const catList: string[] = [
 ];
 
 const Categories: React.FC = () => {
-  const category: number = useSelector((state: RootState) => state.filter.category);
-  const dispatch = useDispatch();
+  const category = useSelector((state: RootState) => state.filter.category);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="categories">
