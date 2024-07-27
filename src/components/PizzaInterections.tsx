@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, selectCartCount, selectPizzaCount } from "../redux/cartSlice";
-import { Pizza } from "../redux/pizzaSlice";
+import { Pizza } from "../API/PizzaAPI";
 import { useAppDispatch } from "../redux/store";
 
 export const doughTypes = ["тонкое", "традиционное"];
 
-const PizzaInterections: React.FC<{pizza: Pizza}> = ({ pizza }) => {
+const PizzaInterections: React.FC<{ pizza: Pizza }> = ({ pizza }) => {
   const { id, types, sizes, price } = { ...pizza };
 
   const [dough, setDough] = useState(0);

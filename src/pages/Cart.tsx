@@ -97,13 +97,14 @@ const Cart: React.FC = () => {
           </div>
         </div>
         <div className="content__items">
-          {items.map((item) => (
-            <CartItem
-              key={item.id}
-              pizza={pizzasInfo.find((pizza) => pizza.id === item.pizzaId)}
-              {...item}
-            />
-          ))}
+          {pizzasInfo.length > 0 &&
+            items.map((item) => (
+              <CartItem
+                key={item.id}
+                pizza={pizzasInfo.find((pizza) => pizza.id === item.pizzaId)}
+                {...item}
+              />
+            ))}
         </div>
         <div className="cart__bottom">
           <div className="cart__bottom-details">
@@ -145,6 +146,6 @@ const Cart: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Cart;
