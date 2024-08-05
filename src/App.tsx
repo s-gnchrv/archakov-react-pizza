@@ -44,39 +44,44 @@ const App: React.FC = () => {
     isMounted.current = true;
   }, [cart]);
 
-  const router = createBrowserRouter([
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: <Root />,
+        errorElement: (
+          <Root>
+            <NotFound />
+          </Root>
+        ),
+        children: [
+          {
+            path: "",
+            element: <LoadableHome />,
+          },
+          {
+            path: "pizza/:id",
+            element: (
+              <Suspense>
+                <PizzaDetail />
+              </Suspense>
+            ),
+          },
+          {
+            path: "cart",
+            element: (
+              <Suspense>
+                <Cart />
+              </Suspense>
+            ),
+          },
+        ],
+      },
+    ],
     {
-      path: "/",
-      element: <Root />,
-      errorElement: (
-        <Root>
-          <NotFound />
-        </Root>
-      ),
-      children: [
-        {
-          path: "",
-          element: <LoadableHome />,
-        },
-        {
-          path: "pizza/:id",
-          element: (
-            <Suspense>
-              <PizzaDetail />
-            </Suspense>
-          ),
-        },
-        {
-          path: "cart",
-          element: (
-            <Suspense>
-              <Cart />
-            </Suspense>
-          ),
-        },
-      ],
-    },
-  ]);
+      basename: "/archakov-react-pizza",
+    }
+  );
 
   return <RouterProvider router={router} />;
 };
