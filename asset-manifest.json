@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/archakov-react-pizza/static/css/main.52348a95.css",
+    "main.js": "/archakov-react-pizza/static/js/main.4f68025d.js",
+    "Home.css": "/archakov-react-pizza/static/css/Home.04339068.chunk.css",
+    "Home.js": "/archakov-react-pizza/static/js/Home.f98d5eed.chunk.js",
+    "Cart.js": "/archakov-react-pizza/static/js/Cart.2261385d.chunk.js",
+    "PizzaDetail.css": "/archakov-react-pizza/static/css/PizzaDetail.ca417653.chunk.css",
+    "PizzaDetail.js": "/archakov-react-pizza/static/js/PizzaDetail.7b117efc.chunk.js",
+    "static/media/empty-cart.png": "/archakov-react-pizza/static/media/empty-cart.db905d1f4b063162f25b.png",
+    "static/media/pizza-logo.svg": "/archakov-react-pizza/static/media/pizza-logo.56ac87032d8f6fdf863326acd06c0d97.svg",
+    "index.html": "/archakov-react-pizza/index.html",
+    "main.52348a95.css.map": "/archakov-react-pizza/static/css/main.52348a95.css.map",
+    "main.4f68025d.js.map": "/archakov-react-pizza/static/js/main.4f68025d.js.map",
+    "Home.04339068.chunk.css.map": "/archakov-react-pizza/static/css/Home.04339068.chunk.css.map",
+    "Home.f98d5eed.chunk.js.map": "/archakov-react-pizza/static/js/Home.f98d5eed.chunk.js.map",
+    "Cart.2261385d.chunk.js.map": "/archakov-react-pizza/static/js/Cart.2261385d.chunk.js.map",
+    "PizzaDetail.ca417653.chunk.css.map": "/archakov-react-pizza/static/css/PizzaDetail.ca417653.chunk.css.map",
+    "PizzaDetail.7b117efc.chunk.js.map": "/archakov-react-pizza/static/js/PizzaDetail.7b117efc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.52348a95.css",
+    "static/js/main.4f68025d.js"
+  ]
+}
